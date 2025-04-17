@@ -1,30 +1,35 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>🪽 Pegasus 🪽</title>
+    <title> 🪽 Pegasus 🪽 </title>
     <style>
-        body {
-            margin: 0;
-            padding: 0;
+        #container {
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
-            min-height: 100vh;
-            background-color: rgba(255, 255, 255, 0.1);
+            padding: 20px;
         }
         
-        .container {
-            text-align: center;
+        #textInput {
+            padding: 8px;
+            margin-bottom: 10px;
+            width: 300px;
         }
 
-        #title {
-            font-family: 'Arial', sans-serif;
+        button {
+            padding: 8px 16px;
+            background-color: #74dde0;
             color: white;
-            font-size: 30px;
-            margin-bottom: 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        #resultDiv {
+            margin-top: 20px;
             padding: 10px;
-            border-radius: 5%;
-            background-color: rgba(255, 255, 255, 0.8);
+            border: 1px solid #ddd;
+            width: 300px;
         }
 
         #timer {
@@ -32,37 +37,23 @@
             display: inline-block;
             font-family: verdana, arial, sans-serif;
             text-align: center;
-            color: white;
-            background-color: rgba(255, 255, 255, 255);
+            color: rgb(160, 87, 87);
+            background-color: rgba(255,255,255,255);
             border-radius: 5%;
             font-size: 50px;
             -webkit-text-stroke: 2px black;
-            margin-bottom: 20px;
-        }
-
-        #timeInput {
-            padding: 10px;
-            font-size: 20px;
-            border: none;
-            border-radius: 5%;
-            background-color: rgba(255, 255, 255, 0.8);
-            color: black;
-            width: 100px;
-        }
-
-        #timeLabel {
-            margin-right: 10px;
-            color: white;
-            font-size: 20px;
         }
     </style>
 </head>
+
 <body>
-    <div class="container">
-        <input type="text" id="titleInput" value="Pegasus Timer" style="padding: 10px; font-size: 30px; border: none; background-color: rgba(255, 255, 255, 0.8);">
-        <div id="timer"></div>
-        <label id="timeLabel">HH:MM</label>
-        <input type="text" id="timeInput" value="00:00" style="padding: 10px; font-size: 20px;">
+    <div id="container">
+        <input type="text" id="timer-title" placeholder="...">
+        <button onclick="updateHTML()">Update</button>
+        <div id="resultDiv"></div>
+
+        <input type="text" div id="after-timer-message"></div>
+	    <div id="timer"></div>
     </div>
 
     <script src="script.js"></script>
