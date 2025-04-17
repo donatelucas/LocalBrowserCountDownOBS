@@ -11,6 +11,7 @@ necessary functions are called either within callbacks or event listeners.
 
 # How to use it
 
-Download the folder and place in any location you want. Use the location of obs-overlay.html as a Local File in the Browser source. e.g. 
+Download the folder and place in any location you want. Use the location of obs-overlay.html as a Local File in the browser source. e.g. 
 [x] Local File -> C:/user/LocalBrowserCountdownOBS/obs-overlay.html
 
+When you need to restart/change the timer or title, open the browser source properties and click "Refresh cache of current page". 

@@ -3,7 +3,7 @@ async function countdown() {
     const timerElement = document.getElementById("timer");
     
     let hours = 2; // Adjust hours
-    let mins = 05; // Adjust minutes
+    let mins = 5; // Adjust minutes
     let secs = 0; // Adjust seconds
 
     while (hours > 0 || mins > 0 || secs > 0) {
