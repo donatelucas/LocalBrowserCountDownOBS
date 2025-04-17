@@ -71,11 +71,18 @@
     </div>
 
     <script>
-        /* Trying a hard refresh to test if OBS updates */
-        setTimeout(() => {
-            window.location.reload(true);
-        }, 3000);
 
+        // Connect to OBS WebSocket
+        const obs = new WebSocket('ws://localhost:4455');
+        obs.onopen = () => {
+            obs.send(JSON.stringify({
+                "request-type": "SetSourceSettings",
+                "sourceName": "YourBrowserSourceName",
+                "sourceSettings": {
+                    "url": "http://localhost:5500/obs-overlay.html?t=" + Date.now()
+                }
+            }));
+        };
         const titleInput = document.getElementById('title');
         const hoursInput = document.getElementById('hours');
         const minutesInput = document.getElementById('minutes');
