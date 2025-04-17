@@ -1,21 +1,154 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>OBS Browser Source</title>
+    <title>OBS Interactive Countdown</title>
     <style>
         body {
-            background: rgb(12, 12, 12);
-            color: rgb(250, 241, 241);
-            font-family: Arial, sans-serif;
-            text-align: center;
+            background: transparent;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-family: 'Georgia', serif;
+            color: white;
         }
-        .text {
-            font-size: 24px;
-            margin: 20px;
+        .title-input {
+            width: 80%;
+            font-size: 2rem;
+            margin-bottom: 15px;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid #555;
+            color: white;
+            font-family: 'Georgia', serif;
+            padding: 5px;
+        }
+        .timer {
+            font-size: 3.5rem;
+            font-weight: bold;
+            margin: 10px 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+        .controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        input[type="number"] {
+            width: 60px;
+            padding: 5px;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid #555;
+            color: white;
+        }
+        button {
+            padding: 8px 15px;
+            background: #4CAF50;
+            border: none;
+            color: white;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        button:disabled {
+            background: #555;
         }
     </style>
 </head>
 <body>
-    <div class="text">See ya, Space Cowboy...</div>
+    <input type="text" class="title-input" id="title" placeholder="Enter Title" value="COUNTDOWN">
+
+    <div class="timer" id="display">00:00:00</div>
+
+    <div class="controls">
+        <input type="number" id="hours" min="0" max="99" value="1" placeholder="H">
+        <span>:</span>
+        <input type="number" id="minutes" min="0" max="59" value="30" placeholder="M">
+        <button id="startBtn">Start</button>
+        <button id="pauseBtn" disabled>Pause</button>
+        <button id="resetBtn">Reset</button>
+    </div>
+
+    <script>
+        /* Trying a hard refresh to test if OBS updates */
+        setTimeout(() => {
+            window.location.reload(true);
+        }, 3000);
+
+        const titleInput = document.getElementById('title');
+        const hoursInput = document.getElementById('hours');
+        const minutesInput = document.getElementById('minutes');
+        const display = document.getElementById('display');
+        const startBtn = document.getElementById('startBtn');
+        const pauseBtn = document.getElementById('pauseBtn');
+        const resetBtn = document.getElementById('resetBtn');
+
+        let totalSeconds = 0;
+        let timerInterval = null;
+        let isRunning = false;
+
+        // Update display (HH:MM:SS)
+        function updateDisplay() {
+            const hours = Math.floor(totalSeconds / 3600);
+            const minutes = Math.floor((totalSeconds % 3600) / 60);
+            const seconds = totalSeconds % 60;
+
+            display.textContent = 
+                `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+
+        // Start timer
+        function startTimer() {
+            if (isRunning) return;
+            
+            // Set initial time from inputs
+            if (timerInterval === null) {
+                totalSeconds = 
+                    (parseInt(hoursInput.value) || 0) * 3600 + 
+                    (parseInt(minutesInput.value) || 0) * 60;
+                updateDisplay();
+            }
+
+            isRunning = true;
+            timerInterval = setInterval(() => {
+                if (totalSeconds <= 0) {
+                    clearInterval(timerInterval);
+                    isRunning = false;
+                    return;
+                }
+                totalSeconds--;
+                updateDisplay();
+            }, 1000);
+
+            startBtn.disabled = true;
+            pauseBtn.disabled = false;
+        }
+
+        // Pause timer
+        function pauseTimer() {
+            if (!isRunning) return;
+            clearInterval(timerInterval);
+            isRunning = false;
+            startBtn.disabled = false;
+            pauseBtn.disabled = true;
+        }
+
+        // Reset timer
+        function resetTimer() {
+            clearInterval(timerInterval);
+            timerInterval = null;
+            isRunning = false;
+            totalSeconds = 0;
+            updateDisplay();
+            startBtn.disabled = false;
+            pauseBtn.disabled = true;
+        }
+
+        // Event listeners
+        startBtn.addEventListener('click', startTimer);
+        pauseBtn.addEventListener('click', pauseTimer);
+        resetBtn.addEventListener('click', resetTimer);
+    </script>
 </body>
 </html>
