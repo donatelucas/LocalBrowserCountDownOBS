@@ -2,10 +2,11 @@ async function countdown() {
     // Initialize timer display element
     const timerElement = document.getElementById("timer");
     
-    let mins = 2; // Change this number to adjust minutes
-    let secs = 1; // Change this number to adjust seconds
+    let hours = 2; // Adjust hours
+    let mins = 05; // Adjust minutes
+    let secs = 0; // Adjust seconds
 
-    while (mins > 0 || secs > 0) {
+    while (hours > 0 || mins > 0 || secs > 0) {
         await wait(1000);
 
         if (secs > 0) {
@@ -13,15 +14,20 @@ async function countdown() {
         } else if (secs === 0 && mins > 0) {
             mins--;
             secs = 59;
+        } else if (mins === 0 && hours > 0) {
+            hours --;
+            mins = 59;
         }
 
         // Display the time with leading zeros for seconds
-        const displaySecs = secs.toString().padStart(2, '0');
-        timerElement.innerHTML = `${mins}:${displaySecs}`;
+        const secsDisplay = secs.toString().padStart(2, '0');
+        const minsDisplay = mins.toString().padStart(2, '0');
+        const hoursDisplay = hours.toString().padStart(2, '0');
+        timerElement.innerHTML = `${hoursDisplay}:${minsDisplay}:${secsDisplay}`;
 
-        // Show "soon" when countdown reaches zero
-        if (mins === 0 && secs === 0) {
-            timerElement.innerHTML = "soon";
+        // Display message when countdown reaches zero
+        if (mins === 0 && secs === 0 && hours === 0) {
+            timerElement.innerHTML = "Time is up!";
         }
     }
 }
