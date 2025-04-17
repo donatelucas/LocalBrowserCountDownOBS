@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title> 🪽 Pegasus 🪽 </title>
+    <title>🪽 Pegasus 🪽</title>
     <style>
         #container {
             display: flex;
@@ -37,23 +37,23 @@
             display: inline-block;
             font-family: verdana, arial, sans-serif;
             text-align: center;
-            color: rgb(160, 87, 87);
-            background-color: rgba(255,255,255,255);
+            color: rgb(255, 255, 255);
+            background-color: transparent;
             border-radius: 5%;
             font-size: 50px;
-            -webkit-text-stroke: 2px black;
+            -webkit-text-stroke: 2px rgb(230, 230, 230);
         }
     </style>
 </head>
 
 <body>
     <div id="container">
-        <input type="text" id="timer-title" placeholder="...">
-        <button onclick="updateHTML()">Update</button>
-        <div id="resultDiv"></div>
+        <div id="timer"></div>
+        <h2 id="timer-title">Countdown Timer</h2>
+        <div id="after-timer-message"></div>
 
-        <input type="text" div id="after-timer-message"></div>
-	    <div id="timer"></div>
+        <input type="text" id="textInput" placeholder="Enter text...">
+        <div id="resultDiv"></div>
     </div>
 
     <script src="script.js"></script>
