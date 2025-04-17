@@ -8,14 +8,11 @@
 
     <title>🪽 Pegasus 🪽</title>
     <style>
-        body {
-            margin: 0;
-            padding: 0;
+        #container {
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
-            min-height: 100vh;
-            background-color: rgba(255, 255, 255, 0.1);
+            padding: 20px;
         }
 
         .roboto {
@@ -27,8 +24,10 @@
             "wdth" 100;
         }
         
-        .container {
-            text-align: center;
+        #textInput {
+            padding: 8px;
+            margin-bottom: 10px;
+            width: 300px;
         }
 
         #title {
@@ -71,6 +70,7 @@
 
     </style>
 </head>
+
 <body>
     <div class="container">
         <div id="title">TITLE</div>
