@@ -2,7 +2,7 @@ async function countdown() {
     // Initialize timer display element
     const timerElement = document.getElementById("timer");
     
-    let mins = 1; // Change this number to adjust minutes
+    let mins = 2; // Change this number to adjust minutes
     let secs = 1; // Change this number to adjust seconds
 
     while (mins > 0 || secs > 0) {
